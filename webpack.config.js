@@ -12,26 +12,27 @@ module.exports = {
     },
     mode: 'development',
     plugins: [
-        /**
-         * All files inside webpack's output.path directory will be removed once, but the
-         * directory itself will not be. If using webpack 4+'s default configuration,
-         * everything under <PROJECT_DIR>/dist/ will be removed.
-         * Use cleanOnceBeforeBuildPatterns to override this behavior.
-         *
-         * During rebuilds, all webpack assets that are not used anymore
-         * will be removed automatically.
-         *
-         * See `Options and Defaults` for information
-         */
+
         // new CleanWebpackPlugin(),
     ],
     module: {
         rules: [{
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader'],
-        }, {
-            test: /\.less$/i,
-            use: ['style-loader', 'css-loader','less-loader'],
-        }],
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.less$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                        }
+                    },
+                    'less-loader'
+                ],
+            }
+        ],
     },
 }
