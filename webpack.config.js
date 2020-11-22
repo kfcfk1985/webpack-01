@@ -8,7 +8,7 @@ module.exports = {
     entry: "./src/index.js",
     output: {
         path: path.resolve(__dirname, "./dist"),
-        filename: "[name]-[hash:8].js"
+        filename: "[name].js"
     },
     mode: 'development',
     plugins: [
@@ -23,12 +23,15 @@ module.exports = {
          *
          * See `Options and Defaults` for information
          */
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),
     ],
     module: {
         rules: [{
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],
-        }, ],
+        }, {
+            test: /\.less$/i,
+            use: ['style-loader', 'css-loader','less-loader'],
+        }],
     },
 }
